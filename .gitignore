@@ -4,3 +4,6 @@ dist/
 build/
 django_admin_log_control.egg-info/
 venv/
+.env
+__pycache__
+.idea/
