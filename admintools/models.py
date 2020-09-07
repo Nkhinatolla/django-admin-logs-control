@@ -1,13 +1,10 @@
-from django.db import models
 from django.contrib import admin
-from django.contrib.postgres.fields import JSONField
-from django.core import serializers
 
 
 def get_content_type_for_model(obj):
     # Since this module gets imported in the application's root package,
     # it cannot import models from other applications at the module level.
-    from django.contrib.contenttypes.models import ContentType
+    from django.contrib.contenttypes import ContentType
     return ContentType.objects.get_for_model(obj, for_concrete_model=False)
 
 
@@ -81,7 +78,7 @@ class CustomModelAdmin(admin.ModelAdmin):
 
         The default implementation creates an admin LogEntry object.
         """
-        from django.contrib.admin.models import LogEntry, ADDITION
+        from django.contrib import LogEntry, ADDITION
         message = changed_message(message, self.old_instance, object)
         return LogEntry.objects.log_action(
             user_id=request.user.pk,
@@ -98,7 +95,7 @@ class CustomModelAdmin(admin.ModelAdmin):
 
         The default implementation creates an admin LogEntry object.
         """
-        from django.contrib.admin.models import LogEntry, CHANGE
+        from django.contrib import LogEntry, CHANGE
         message = changed_message(message, self.old_instance, object)
         return LogEntry.objects.log_action(
             user_id=request.user.pk,
@@ -116,7 +113,7 @@ class CustomModelAdmin(admin.ModelAdmin):
 
         The default implementation creates an admin LogEntry object.
         """
-        from django.contrib.admin.models import LogEntry, DELETION
+        from django.contrib import LogEntry, DELETION
         message = str(self.old_instance)
         return LogEntry.objects.log_action(
             user_id=request.user.pk,
