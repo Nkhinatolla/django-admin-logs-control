@@ -1,1 +1,1 @@
-default_app_config = 'main.apps.AdmintoolsConfig'
+default_app_config = 'admintools.apps.AdmintoolsConfig'
