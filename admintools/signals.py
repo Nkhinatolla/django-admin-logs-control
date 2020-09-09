@@ -12,6 +12,11 @@ def bot_message(sender, instance, **kwargs):
     chat_id = os.getenv('TELEGRAM_LOG_CHAT_ID', None)
     message = LogEntry.objects.first()
     try:
-        bot.send_message(chat_id, str(message.change_message))
+        bot.send_message(chat_id, str((message.user_id,
+                                       message.content_type_id,
+                                       message.object_id,
+                                       message.object_repr,
+                                       message.action_flag,
+                                       message.change_message)))
     except:
-        bot.send_message(chat_id, str("message wrong format"))
+        pass
