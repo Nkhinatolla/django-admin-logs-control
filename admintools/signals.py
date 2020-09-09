@@ -10,13 +10,9 @@ import os
 def bot_message(sender, instance, **kwargs):
     bot = telebot.TeleBot(os.getenv('TELEGRAM_LOG_BOT_TOKEN', None))
     chat_id = os.getenv('TELEGRAM_LOG_CHAT_ID', None)
+    FLAGS=['NONE', 'ADDITION', 'CHANGED', 'DELETION']
     message = LogEntry.objects.first()
     try:
-        bot.send_message(chat_id, str((message.user_id,
-                                       message.content_type_id,
-                                       message.object_id,
-                                       message.object_repr,
-                                       message.action_flag,
-                                       message.change_message)))
+        bot.send_message(chat_id, (str(message.content_type) + '\n' + str(message.object_repr) + '\n' +str(FLAGS[int(message.action_flag)]) + '\n' +str(message.change_message)))
     except:
         pass
