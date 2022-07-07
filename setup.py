@@ -36,7 +36,7 @@ requirements = parse_requirements(os.path.join(os.path.dirname(__file__), 'requi
 
 setup(
     name='django-admin-log-control',
-    version='1.1.15',
+    version='1.2.0',
     packages=find_packages(),
     description='Control your admin-panel changes',
     long_description=long_description,
