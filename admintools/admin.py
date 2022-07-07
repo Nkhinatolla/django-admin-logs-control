@@ -54,11 +54,14 @@ class LogEntryAdmin(admin.ModelAdmin):
         if obj.action_flag == DELETION:
             link = escape(obj.object_repr)
         else:
-            ct = obj.content_type
-            link = u'<a href="%s">%s</a>' % (
-                reverse('admin:%s_%s_change' % (ct.app_label, ct.model), args=[obj.object_id]),
-                escape(obj.object_repr.replace('{', '(').replace('}', ')')),
-            )
+            try:
+                ct = obj.content_type
+                link = u'<a href="%s">%s</a>' % (
+                    reverse('admin:%s_%s_change' % (ct.app_label, ct.model), args=[obj.object_id]),
+                    escape(obj.object_repr.replace('{', '(').replace('}', ')')),
+                )
+            except Exception as e:
+                link = escape(obj.object_repr)
         return format_html(link)
 
     def change_message_(self, obj):
