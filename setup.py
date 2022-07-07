@@ -29,7 +29,7 @@ def reqs(*f):
 
 setup(
     name='django-admin-log-control',
-    version='1.1.7',
+    version='1.1.12',
     packages=find_packages(),
     description='Control your admin-panel changes',
     long_description=long_description,
